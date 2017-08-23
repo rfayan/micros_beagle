@@ -11,6 +11,7 @@ git clone https://aur.archlinux.org/openalpr.git
 ```
 
 Se tentassemos criar o pacode a partir do arquivo iriamos receber uma mensagem de erro dizendo que o pacote é incompatível com a arquitetura.
+
 Para resolver este problema nós alteramos o arquivo PKGBUILD, mais expecificamente a linha onde é especificado a arquitetura do pacote para:
 
 ```
