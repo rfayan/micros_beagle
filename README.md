@@ -38,4 +38,6 @@ Os pacotes `curl`, `cmake` e `opencv` podem ser instalados facilmente com o coma
 sudo pacman -S curl cmake opencv
 ```
 
+As outras dependências também não tem compatibilidade com ARM, então temos que baixar o arquivo PKGBUILD e alterar a mesma linha já citada antes para que possamos compilar os pacotes.
 
+Como o pacote `tesseract` depende do pacote `leptonica` deve-se instalar `leptonica` antes.
