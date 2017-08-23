@@ -1,8 +1,8 @@
-#micros_beagle
+# micros_beagle
 
-##Instalação do openalpr na BeagleBone Black
+## Instalação do openalpr na BeagleBone Black
 
-###openalpr
+### openalpr
 
 No repositório de usuário do Arch Linux existe o pacote openalpr, podemos baixar o arquivo PKGBUILD utilizando o comando:
 
@@ -20,7 +20,7 @@ arch('armv7h' 'i686' 'x86_64')
 
 Fazendo isso, fomos aptos a rodar o `makepkg` e receber apenas o erro que faltam dependências.
 
-###Dependências
+### Dependências
 
 Na prórpria página do pacote `openalpr` as dependências são listadas. Elas são
 
