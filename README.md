@@ -42,6 +42,36 @@ As outras dependências também não tem compatibilidade com ARM, então temos q
 
 Como o pacote `tesseract` depende do pacote `leptonica` deve-se instalar `leptonica` antes.
 
+### Compilando openalpr
+
+Executamos o comando `makepkg` para compilar o pacote `openalpr`e cirar um pacote para o Arch Linux.
+
+Obtivemos o seguinte erro:
+
+```
+In file included from /usr/include/tesseract/ltrresultiterator.h:26:0,
+                 from /usr/include/tesseract/resultiterator.h:26,
+                 from /usr/include/tesseract/baseapi.h:31,
+                 from /home/alarm/openalpr/src/openalpr-2.3.0/src/openalpr/ocr/tesseract_ocr.h:36,
+                 from /home/alarm/openalpr/src/openalpr-2.3.0/src/openalpr/ocr/tesseract_ocr.cpp:20:
+/usr/include/tesseract/unichar.h:164:10: error: ‘string’ does not name a type; did you mean ‘stdin’?
+   static string UTF32ToUTF8(const std::vector<char32>& str32);
+          ^~~~~~
+          stdin
+make[2]: *** [openalpr/CMakeFiles/openalpr.dir/build.make:375: openalpr/CMakeFiles/openalpr.dir/ocr/tesseract_ocr.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:587: openalpr/CMakeFiles/openalpr.dir/all] Error 2
+make: *** [Makefile:152: all] Error 2
+==> ERROR: A failure occurred in build().
+    Aborting...
+```
+
+Para solucionar tivemos que editar o arquivo `/usr/include/tesseract/unichar.h`e adicionar logo antes dos `includes` as seguintes linhas:
+
+```
+#include <string.h>
+using std::string ;
+```
+
 ### Captura de Imagens
 
 Para o desenvolvimento do projeto, utilizamos para a captura de imagens a camera ODROID USB-CAM 720P, que foi conectada ao port USB presente na placa de desenvolvimento Beagle Bone Black. Caso o periférico tenha sido reconhecido pelo sistema operacional, o sistema deve criar uma pasta em `/dev/video0`. Para verificar se a placa foi reconhecida com sucesso, basta executar o seguinte comando no terminal:
