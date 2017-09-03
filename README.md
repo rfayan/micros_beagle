@@ -92,7 +92,7 @@ sudo pacman -U openalpr-2.3.0-1-armv7h.pkg.tar.xz
 Ao tentar rodar o programa para identificar uma placa em uma foto fomos surpreendidos pela mensagem `No license plates found.` . 
 Para resolver este problema, tivemos que pegar os dados na pasta `runtime_data` do github do [openalpr](https://github.com/openalpr/openalpr) e copiar para pasta `/usr/shar/openalpr/runtime_data` da BeagleBone.
 
-Rodando novemente o programa com linha de comando `alpr ./carro.jpeg` obtivemos a seguinte resposta:
+Rodando novemente o programa com linha de comando `alpr -c br ./carro.jpeg` obtivemos a seguinte resposta:
 
 ```
 plate0: 10 results
