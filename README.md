@@ -72,6 +72,43 @@ Para solucionar tivemos que editar o arquivo `/usr/include/tesseract/unichar.h`e
 using std::string ;
 ```
 
+Outro erro que tivemos foi que após a compilação o comando `makepkg` acusou que não havia nenhuma regra para instalação do pacote, isto foi resolvido alterando a função `package()` do arquivo `PKGBUILD` para:
+
+```
+package() {
+	cd "$pkgname-$pkgver"/
+	make DESTDIR="$pkgdir/" install
+}
+```
+
+Após esta correção conseguimos gerar o pacote com sucesso e só basta instalá-lo com a linha de comando abaixo:
+
+```
+sudo pacman -U openalpr-2.3.0-1-armv7h.pkg.tar.xz
+```
+
+### Atualizando arquivos openalpr
+
+Ao tentar rodar o programa para identificar uma placa em uma foto fomos surpreendidos pela mensagem `No license plates found.` . 
+Para resolver este problema, tivemos que pegar os dados na pasta `runtime_data` do github do [openalpr](https://github.com/openalpr/openalpr) e copiar para pasta `/usr/shar/openalpr/runtime_data` da BeagleBone.
+
+Rodando novemente o programa com linha de comando `alpr ./carro.jpeg` obtivemos a seguinte resposta:
+
+```
+plate0: 10 results
+    - ETG7973	 confidence: 90.848
+    - ETG7S73	 confidence: 85.0384
+    - ETG7B73	 confidence: 83.3651
+    - ETO7973	 confidence: 79.1924
+    - ET67973	 confidence: 79.183
+    - ET07973	 confidence: 79.0553
+    - ETS7973	 confidence: 78.9382
+    - ETO7S73	 confidence: 73.3828
+    - ET67S73	 confidence: 73.3734
+    - ET07S73	 confidence: 73.2457
+```
+
+
 ### Captura de Imagens
 
 Para o desenvolvimento do projeto, utilizamos para a captura de imagens a camera ODROID USB-CAM 720P, que foi conectada ao port USB presente na placa de desenvolvimento Beagle Bone Black. Caso o periférico tenha sido reconhecido pelo sistema operacional, o sistema deve criar uma pasta em `/dev/video0`. Para verificar se a placa foi reconhecida com sucesso, basta executar o seguinte comando no terminal:
