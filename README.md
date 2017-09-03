@@ -68,7 +68,7 @@ make: *** [Makefile:152: all] Error 2
 Para solucionar tivemos que editar o arquivo `/usr/include/tesseract/unichar.h`e adicionar logo antes dos `includes` as seguintes linhas:
 
 ```
-#include <string.h>
+#include <string>
 using std::string ;
 ```
 
