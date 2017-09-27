@@ -142,3 +142,25 @@ fswebcam -r 640x480 -D 1 --no-banner --jpeg 50 /home/alarm/jsmpeg/shot.jpg
 
 O comando acima solicita a execução do comando `fswebcam` para captura de imagem pela camera conectada no port USB da BeagleBone Black. Caso esteja sendo utilizada uma outra placa de desenvolvimento com mais de uma camera conectada, deve-se especificar o dispositivo através do argumento `-d /dev/video0`. Os restantes dos argumentos, em ordem de escrita, se referem a resolução da imagem a ser capturada `-r 640x480`, delay de captura da imagem após a execução do comando `-D 1`, remove o banner da imagem `--no-banner`, especifica o formato de imagem ao capturar a imagem e sua qualidade `--jpeg 50` e o último argumento especifica a pasta em que a imagem será armazenada e o nome do arquivo `/home/alarm/jsmpeg/shot.jpg`.
 
+
+
+## Comunicação MQTT
+
+### Mosquito
+
+Para realizar a comunicaçaõ via MQTT tivemos que baixar um MQTT Broker, o ecolhido foi o `mosquitto`. Para instalá-lo e executá-lo na porta 8186 foram utilizadas as seguintes linhas de comando:
+
+```
+sudo pacman -S mosquitto
+mosquitto -p 8186
+```
+
+### Paho MQTT
+
+Iremos utilizar Python para a comunicação via MQTT, para isso utilizaremos a biblioteca `paho mqtt`. Para instalá-la basta executar a seguinte linha de comando:
+
+```
+pip install paho-mqtt
+```
+
+A partir desta [página](https://pypi.python.org/pypi/paho-mqtt/1.3.0#client) criamos um código que verifica os dados publicados no tópico "teste". O código está com o nome de teste.py. 
